@@ -63,16 +63,6 @@ public static int ToInteger(string str)
 		{
 			int currentDigit = (int) str[left] - '0';
 			result = (result * 10) + currentDigit;
-			
-			if (result > int.MaxValue)
-			{
-				if (isNegative && left == right && (-result) == int.MinValue)
-				{
-					return int.MinValue;
-				}
-				
-				throw new OverflowException();
-			}
 		}
 		else
 		{
@@ -80,12 +70,22 @@ public static int ToInteger(string str)
 		}
 		left++;
 	}
+
+	if (result > int.MaxValue)
+	{
+		if (isNegative && (-result) == int.MinValue)
+		{
+			return int.MinValue;
+		}
+				
+		throw new OverflowException();
+	}
 	
 	if (isNegative)
 	{	
 		result *= -1;
 	}
-	
+
 	return (int)result;
 }
 

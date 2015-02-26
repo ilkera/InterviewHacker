@@ -29,12 +29,7 @@ private static void GetCombinations(
 								int currentSum,
 								List<int> solution,
 								List<List<int>> result)
-{
-	if (currentSum > target)
-	{
-		return;
-	}
-	
+{	
 	if (currentSum == target)
 	{
 		result.Add(new List<int>(solution));
@@ -43,17 +38,20 @@ private static void GetCombinations(
 	
 	for (int i = currentIndex; i < sorted.Count; i++)
 	{
-		currentSum += sorted[i];
-		solution.Add(sorted[i]);
-		
-		GetCombinations(sorted, i + 1, target, currentSum, solution, result);
-		
-		solution.RemoveAt(solution.Count - 1);
-		currentSum -= sorted[i];
-		
-		while (i < sorted.Count - 1 && sorted[i] == sorted[i+1])
+		if (currentSum + sorted[i] <= target)
 		{
-			i++;
+			currentSum += sorted[i];
+			solution.Add(sorted[i]);
+		
+			GetCombinations(sorted, i + 1, target, currentSum, solution, result);
+		
+			solution.RemoveAt(solution.Count - 1);
+			currentSum -= sorted[i];
+		
+			while (i < sorted.Count - 1 && sorted[i] == sorted[i+1])
+			{
+				i++;
+			}
 		}
 	}
 }

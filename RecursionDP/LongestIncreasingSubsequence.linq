@@ -47,7 +47,7 @@ public static List<int> LongestIncreseaingSubsequence_Items(int[] array)
 	int maxLength = int.MinValue;
 	int bestEnd = 0;
 	
-	dp[0] = array[0];
+	dp[0] = 1;
 	choice[0] = -1;
 	
 	for (int i = 1; i < array.Length; i++)

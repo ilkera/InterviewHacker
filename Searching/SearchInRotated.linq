@@ -16,7 +16,8 @@ void Main()
 	SearchRotated(new int[] {4, 5, 6, 2, 3}, 2).Dump();
 	SearchRotated(new int[] {5, 0, 1, 2, 3}, 2).Dump();
 	SearchRotated(new int[] {5, 0, 1, 2, 3}, 0).Dump();
-	
+
+	//SearchRotated(new int[] {1, 3, 1, 1, 1}, 3).Dump();
 	SearchRotated(new int[] {1, 1, 1, 1, 5, 1}, 5).Dump();
 }
 
@@ -52,7 +53,7 @@ public static int SearchRotated(int[] array, int target)
 		}
 		else
 		{
-			if (target >= array[mid] && target <= array[low])
+			if (target >= array[mid] && target <= array[high])
 			{
 				low = mid + 1;
 			}
