@@ -3,6 +3,7 @@
 void Main()
 {
 	List<BagItem> items = new List<BagItem>();
+/*
 	items.Add(new BagItem(175, 10));
 	items.Add(new BagItem(90, 9));
 	items.Add(new BagItem(20, 4));
@@ -13,6 +14,17 @@ void Main()
 	ChooseBest_Recursive(items, 20).Dump();
 	
 	ChooseBest(items, 20).Dump();
+	
+	*/
+	
+	items.Add(new BagItem(175, 2));
+	items.Add(new BagItem(90, 4));
+	items.Add(new BagItem(20, 1));
+	items.Add(new BagItem(50, 3));
+	items.Add(new BagItem(10, 1));
+	items.Add(new BagItem(200, 2));
+	
+	ChooseBest(items, 7).Dump();
 }
 
 public static int ChooseBest(List<BagItem> items, int maxCapacity)
@@ -36,10 +48,14 @@ public static int ChooseBest(List<BagItem> items, int maxCapacity)
 			}
 			else
 			{
-				table[weight, item] = Math.Max(table[weight - current.Weight, item-1] + current.Value, table[weight, item-1]);
+				table[weight, item] = Math.Max(
+										table[weight - current.Weight, 
+										item-1] + current.Value, table[weight, item-1]);
 			}
 		}
 	}
+	
+	table.Dump();
 
 	return table[maxCapacity, items.Count];
 }
