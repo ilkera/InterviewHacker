@@ -89,6 +89,7 @@ private static bool SearchMaze(int[,] matrix, RowCol current, RowCol target, boo
 		isFound = SearchMaze(matrix, new RowCol(current.Row, current.Col + 1), target, visited);
 	}
 
+	visited[current.Row, current.Col] = false;	
 	return isFound;
 }
 

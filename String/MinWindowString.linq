@@ -9,57 +9,74 @@ void Main()
 
 public static string MinWindowString(string source, string target)
 {
-	int[] needToFind = new int[256];
-	int[] hasFound = new int[256];
-
-	foreach (var element in target)
+	Dictionary<char, int> needed = new Dictionary<char, int>();
+	
+	for (int i = 0; i < target.Length; i++)
 	{
-		needToFind[element]++;
+		if (!needed.ContainsKey(target[i]))
+		{
+			needed.Add(target[i], 1);
+		}
+		else
+		{
+			++needed[target[i]];
+		}
 	}
 	
-	int minWindowLen = int.MaxValue;
-	int count = 0;	
+	Dictionary<char, int> found = new Dictionary<char, int>();
+	int min = int.MaxValue;
+	int foundWindow = 0;	
 	int minStart = 0;
 	int minEnd = 0;
 	int start = 0;
 
 	for (int i = 0; i < source.Length; i++)
 	{
-		if (needToFind[source[i]] == 0)
+		if (needed.ContainsKey(source[i]))
 		{
-			continue;
-		}
-		
-		hasFound[source[i]]++;
-		if (hasFound[source[i]] <= needToFind[source[i]])
-		{
-			count++;
-		}
-		
-		if (count == target.Length)
-		{
-			while (needToFind[source[start]] == 0 || hasFound[source[start]] > needToFind[source[start]])
+			if (!found.ContainsKey(source[i]))
 			{
-				if (hasFound[source[start]] > needToFind[source[start]])
+				found.Add(source[i], 1);
+				++foundWindow;
+			}
+			else
+			{
+				if (found[source[i]] < needed[source[i]])
 				{
-					hasFound[source[start]]--;
+					++foundWindow;
 				}
-				start++;
+				++found[source[i]];
+			}
+		}
+		
+		if (foundWindow == target.Length)
+		{
+			char current = source[start];
+			while (!found.ContainsKey(current) || found[current] > needed[current])
+			{
+				if (found.ContainsKey(current) && found[current] > needed[current])
+				{
+					--found[current];
+				}
+				++start;
+				current = source[start];
 			}
 			
-			int windowLen = i - start + 1;			
-			if (windowLen < minWindowLen)
+			int windowLength = i - start + 1;
+			
+			if (min > windowLength)
 			{
+				min = windowLength;
 				minStart = start;
 				minEnd = i;
-				minWindowLen = windowLen;
 			}
 		}
+		
 	}
 	
-	if (minWindowLen != 0)
+	if (min != int.MaxValue)
 	{
-		return source.Substring(minStart, minWindowLen);
+		return source.Substring(minStart, minEnd - minStart + 1);
 	}
 	
 	return null;

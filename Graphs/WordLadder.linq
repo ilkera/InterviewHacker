@@ -72,7 +72,7 @@ private static IEnumerable<string> GetNeighborWords(string word, HashSet<string>
 		{
 			if (ch == sb[i])
 			{
-				break;
+				continue;
 			}
 			
 			sb[i] = ch;

@@ -72,8 +72,8 @@ public class DepthFirstPaths
 	private void Dfs_Iterative(Graph g)
 	{
 		Stack<int> vertices = new Stack<int>();
-		
 		vertices.Push(this.source);
+		
 		while (vertices.Count != 0)
 		{
 			int current = vertices.Pop();

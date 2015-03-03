@@ -3,7 +3,7 @@
 void Main()
 {
 	HashSet<string> words = new HashSet<string>();
-	ReadWords(@"D:\Github\coding_interviews\Input\BoggleWords.txt", words);
+	ReadWords(@"D:\Github\InterviewHacker\Input\BoggleWords.txt", words);
 	
 	Boggle b = new Boggle(4, words);
 	
@@ -44,17 +44,7 @@ public class Boggle
 	}
 	
 	private void FindWord(string prefix, int row, int col, HashSet<string> result)
-	{
-		if (row < 0 ||
-			row >= this.length ||
-			col < 0 ||
-			col >= this.length || 
-			this.visited[row, col] ||
-			!this.HasPrefix(prefix))
-		{
-			return;
-		}
-		
+	{		
 		this.visited[row, col] = true;
 		prefix += this.matrix[row, col];
 		
@@ -67,11 +57,29 @@ public class Boggle
 		{
 			for (int neighbor_col = -1; neighbor_col <= 1; neighbor_col++)
 			{
-				FindWord(prefix, row + neighbor_row, col + neighbor_col, result);
+				if (IsValidMove(prefix, row + neighbor_row, col + neighbor_col))
+				{
+					FindWord(prefix, row + neighbor_row, col + neighbor_col, result);
+				}
 			}
 		}
 		
 		this.visited[row, col] = false;
+	}
+	
+	private bool IsValidMove(string prefix, int row, int col)
+	{
+		if (row < 0 ||
+			row >= this.length ||
+			col < 0 ||
+			col >= this.length || 
+			this.visited[row, col] ||
+			!this.HasPrefix(prefix))
+		{
+			return false;
+		}
+		
+		return true;
 	}
 	
 	private bool IsWord(string str)
