@@ -11,6 +11,37 @@ void Main()
 	items.Add(new BagItem(200, 20));
 	
 	ChooseBest_Recursive(items, 20).Dump();
+	
+	ChooseBest(items, 20).Dump();
+}
+
+public static int ChooseBest(List<BagItem> items, int maxCapacity)
+{
+	if (items == null || items.Count < 1)
+	{
+		return 0;
+	}
+	
+	int[,] table = new int[maxCapacity + 1, items.Count + 1];
+	
+	for (int item = 1; item < table.GetLength(1); item++)
+	{
+		for (int weight = 1; weight < table.GetLength(0); weight++)
+		{
+			BagItem current = items[item - 1];
+			
+			if (current.Weight > weight)
+			{
+				table[weight, item] = table[weight, item - 1];
+			}
+			else
+			{
+				table[weight, item] = Math.Max(table[weight - current.Weight, item-1] + current.Value, table[weight, item-1]);
+			}
+		}
+	}
+
+	return table[maxCapacity, items.Count];
 }
 
 public class Bag
@@ -46,32 +77,31 @@ public static Bag ChooseBest_Recursive(List<BagItem> items, int totalWeight)
 		return new Bag(totalWeight);
 	}
 	
-	return ChooseBestHelper(items, totalWeight, 0);
+	return ChooseBestHelper(items, totalWeight);
 }
 
 private static Bag ChooseBestHelper(
 List<BagItem> items, 
-int totalWeight,
-int currentIndex)
+int totalWeight)
 {
-	if (totalWeight <= 0 || currentIndex == items.Count || items[currentIndex].Weight > totalWeight)
+	if (items.Count == 0 || totalWeight <= 0)
 	{
-		return new Bag(totalWeight);
+		return new Bag(0);
 	}
 	
-	BagItem first = items[currentIndex];
+	BagItem first = items[0];
 	
 	// Without taking the first
-	Bag remaining_without_current = ChooseBestHelper(items, totalWeight, currentIndex + 1);
+	Bag remaining_without_current = ChooseBestHelper(items.Skip(1).ToList(), totalWeight);
 	
 	// With taking the first
-	Bag remaining_with_current = ChooseBestHelper(items, totalWeight - first.Weight, currentIndex + 1);
+	Bag remaining_with_current = ChooseBestHelper(items.Skip(1).ToList(), totalWeight - first.Weight);
 	remaining_with_current.Items.Add(first);
 	remaining_with_current.TotalValue += first.Value;
 	
 	Bag result;
 	
-	if (remaining_with_current.TotalValue > remaining_without_current.TotalValue)
+	if (first.Weight <= totalWeight && remaining_with_current.TotalValue > remaining_without_current.TotalValue)
 	{
 		result = remaining_with_current;
 	}
