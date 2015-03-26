@@ -25,7 +25,6 @@ public List<int> MaxInSlidingWindows(int[] array, int windowSize)
 			for (int i = windowSize; i < array.Length; i++)
 			{		
 				result.Add(array[dequeue.First.Value]);
-				
 				while (dequeue.Count != 0 && array[i] >= array[dequeue.Last.Value])
 				{
 					dequeue.RemoveLast();
@@ -38,6 +37,7 @@ public List<int> MaxInSlidingWindows(int[] array, int windowSize)
 			
 				dequeue.AddLast(i);
 			}	
+			
 			result.Add(array[dequeue.First.Value]);			
 		}
 		

@@ -32,10 +32,10 @@ public static int MatchingParens(string str, int opening_paren_index)
 			}
 			else
 			{
-				open_paran_count--;
+				--open_paran_count;
 			}
 		}
-		position += 1;
+		++position;
 	}
 	
 	return -1;

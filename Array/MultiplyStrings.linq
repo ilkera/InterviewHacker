@@ -64,11 +64,8 @@ private static char ToChar(int number)
 }
 
 private static int MultiplyChars(char c1, char c2)
-{
-	int first = (int)c1 - '0';
-	int second = (int)c2-'0';
-	
-	return first * second;
+{	
+	return ToInt(c1) * ToInt(c2);
 }
 
 // Define other methods and classes here

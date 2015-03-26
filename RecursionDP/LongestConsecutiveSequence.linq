@@ -20,6 +20,7 @@ public static int GetLongestConsecutiveSequence(int[] array)
 	}
 	
  	int[] sequenceLength = new int[array.Length];
+	int longest = 0;
 	
 	for (int i = 0; i < array.Length; i++)
 	{
@@ -29,15 +30,9 @@ public static int GetLongestConsecutiveSequence(int[] array)
 		}
 		
 		sequenceLength[i] = GetConsecutiveSequenceLength(array[i], map, sequenceLength);
+		longest = Math.Max(longest, sequenceLength[i]);
 	}
 	
-	int longest = int.MinValue;
-	
-	for (int i = 0; i < sequenceLength.Length; i++)
-	{
-		longest = Math.Max(sequenceLength[i], longest);
-	}
-
 	return longest;
 }
 

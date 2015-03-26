@@ -25,7 +25,6 @@ void Main()
 public static int ToExcelId(string code)
 {
 	int result = 0;
-	
 	for (int i = 0; i < code.Length; i++)
 	{
 		result = result * 26 + code[i] - 'A' + 1;

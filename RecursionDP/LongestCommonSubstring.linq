@@ -72,7 +72,7 @@ public static string LongestCommonSubstring(string s1, string s2)
 			}
 			else
 			{
-				if ( iFirst == 0 || iSecond == 0)
+				if (iFirst == 0 || iSecond == 0)
 				{
 					scoreTable[iFirst, iSecond] = 1;
 				}

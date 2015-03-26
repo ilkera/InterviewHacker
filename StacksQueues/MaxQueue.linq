@@ -40,7 +40,7 @@ public class Deque
 	
 	public void Push_Front(int item)
 	{
-		if (this.list.Count == this.capacity)
+		if (this.IsFull())
 		{
 			throw new Exception("full");
 		}

@@ -3,8 +3,7 @@
 void Main()
 {
 	Stack s = new Stack(10);
-	
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 9; i++)
 	{
 		s.Push(i);
 		Console.WriteLine("Added {0} peek is {1}", i, s.Top());
@@ -50,7 +49,7 @@ public class Stack
 		}
 		
 		this.stack[++this.top] = item;
-		this.count++;
+		++this.count;
 	}
 	
 	public int Pop()
@@ -61,8 +60,8 @@ public class Stack
 		}
 		
 		int item = this.stack[this.top];
-		this.top--;
-		this.count--;
+		--this.top;
+		--this.count;
 		
 		return item;
 	}
@@ -74,7 +73,9 @@ public class Stack
 			throw new Exception("Stack is empty");
 		}
 		
-		return this.stack[this.top];
+		int item = this.stack[this.top];
+		
+		return item;
 	}
 }
 // Define other methods and classes here

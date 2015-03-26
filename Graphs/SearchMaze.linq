@@ -67,30 +67,29 @@ private static bool SearchMaze(int[,] matrix, RowCol current, RowCol target, boo
 	}
 	
 	visited[current.Row, current.Col] = true;	
-	bool isFound = false;
 
-	if (CanMove(matrix, current.Row - 1, current.Col, visited))
+	if (CanMove(matrix, current.Row - 1, current.Col, visited) && SearchMaze(matrix, new RowCol(current.Row -1, current.Col), target, visited))
 	{
-		isFound = SearchMaze(matrix, new RowCol(current.Row -1, current.Col), target, visited);
+		return true;
 	}
 	
-	if (!isFound && CanMove(matrix, current.Row + 1, current.Col, visited)) 
+	if (CanMove(matrix, current.Row + 1, current.Col, visited) && SearchMaze(matrix, new RowCol(current.Row + 1, current.Col), target, visited)) 
 	{
-		isFound = SearchMaze(matrix, new RowCol(current.Row + 1, current.Col), target, visited);
+		return true;
 	}
 	
-	if (!isFound && CanMove(matrix, current.Row, current.Col - 1, visited))
+	if (CanMove(matrix, current.Row, current.Col - 1, visited) && SearchMaze(matrix, new RowCol(current.Row, current.Col - 1), target, visited))
 	{
-		isFound = SearchMaze(matrix, new RowCol(current.Row, current.Col - 1), target, visited);	
+		return true;	
 	}
 	
-	if (!isFound && CanMove(matrix, current.Row, current.Col + 1, visited))
+	if (CanMove(matrix, current.Row, current.Col + 1, visited) && SearchMaze(matrix, new RowCol(current.Row, current.Col + 1), target, visited))
 	{
-		isFound = SearchMaze(matrix, new RowCol(current.Row, current.Col + 1), target, visited);
+		return true;
 	}
 
 	visited[current.Row, current.Col] = false;	
-	return isFound;
+	return false;
 }
 
 private static bool CanMove(int[,] matrix, int row, int col, bool[,] visited)

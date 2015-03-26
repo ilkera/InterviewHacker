@@ -66,7 +66,7 @@ public class SudokuSolver
 			return SolveSudokuHelper(matrix, row, col + 1);
 		}
 		
-		for (int val = 1; val <= 9; val++)
+		for (int val = 1; val <= 9; ++val)
 		{
 			matrix[row, col] = val;
 			

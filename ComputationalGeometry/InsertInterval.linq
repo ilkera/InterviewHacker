@@ -40,7 +40,7 @@ public class Util
 		
 		while (current < intervals.Count)
 		{	
-			if (IsSmaller(intervals[current], lastMerged))
+			if (IsGreater(lastMerged, intervals[current]))
 			{
 				result.Add(intervals[current]);
 			}
@@ -64,11 +64,6 @@ public class Util
 	private static bool IsGreater(Interval a, Interval b)
 	{
 		return a.Start > b.End;
-	}
-	
-	private static bool IsSmaller(Interval a, Interval b)
-	{
-		return a.End < b.Start;
 	}
 	
 	private static Interval Merge(Interval a, Interval b)

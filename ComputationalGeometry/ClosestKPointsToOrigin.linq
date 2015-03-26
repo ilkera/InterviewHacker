@@ -1,5 +1,5 @@
 <Query Kind="Program">
-  <Reference Relative="..\Collections\PowerCollections.dll">D:\Github\coding_interviews\Collections\PowerCollections.dll</Reference>
+  <Reference Relative="..\Collections\PowerCollections.dll">D:\Github\InterviewHacker\Collections\PowerCollections.dll</Reference>
   <Namespace>Wintellect.PowerCollections</Namespace>
 </Query>
 

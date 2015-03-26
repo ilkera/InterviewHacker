@@ -54,8 +54,8 @@ public class CircularQueue<T>
 		}
 		
 		this.data[rear] = item;
-		this.count++;
-		this.rear = (this.rear + 1) % this.data.Length;
+		++this.count;
+		this.rear = (this.rear + 1) % this.capacity;
 	}
 	
 	public T Dequeue()
@@ -67,7 +67,7 @@ public class CircularQueue<T>
 		
 		T result = this.data[this.front];
 		this.count--;
-		this.front = (this.front + 1) % this.data.Length;
+		this.front = (this.front + 1) % this.capacity;
 		return result;
 	}
 	

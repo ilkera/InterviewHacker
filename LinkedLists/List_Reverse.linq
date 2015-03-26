@@ -21,8 +21,7 @@ public class ListUtils
 		
 		while (current != null)
 		{
-			Node next = current.Next;
-			
+			Node next = current.Next;	
 			current.Next = previous;
 			previous = current;
 			current = next;

@@ -22,8 +22,7 @@ public static int RemoveElement(int[] array, int target)
 			continue;
 		}
 		
-		array[current] = array[i];
-		current++;
+		array[current++] = array[i];
 	}
 	
 	return current;

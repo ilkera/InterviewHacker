@@ -6,6 +6,8 @@ void Main()
      int [] array2 = {27, 39, 48, 51, 79};
 	 
 	 FindMinDiference(array1, array2).Dump();
+	 FindMinDiference(new int[] {5,7,11}, new int[] {12}).Dump();
+	 FindMinDiference(new int[] {5,6}, new int[] {1}).Dump();
 }
 
 public static int FindMinDiference(int[] first, int [] second)
@@ -40,30 +42,6 @@ public static int FindMinDiference(int[] first, int [] second)
 		else
 		{
 			iFirst++;
-		}
-	}
-	
-	if (iFirst < lenFirst)
-	{
-		iSecond--;
-		
-		while (iFirst < lenFirst)
-		{
-			int diff = Math.Abs(first[iFirst] - second[iSecond]);
-			minDiff = Math.Min(minDiff, diff);
-			iFirst++;
-		}
-	}
-	
-	if (iSecond < lenSecond)
-	{
-		iFirst--;
-		
-		while (iSecond < lenSecond)
-		{
-			int diff = Math.Abs(first[iFirst] - second[iSecond]);
-			minDiff = Math.Min(minDiff, diff);
-			iSecond++;
 		}
 	}
 	

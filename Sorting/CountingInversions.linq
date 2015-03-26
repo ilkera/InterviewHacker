@@ -48,36 +48,32 @@ private static int CountSplitInversion(int[] array, int leftStart, int leftEnd, 
 		right[i - (leftEnd + 1)] = array[i];
 	}
 	
-	int[] output = new int[rightEnd - leftStart + 1];
-	
 	int inversionCount = 0;
-	int leftIndex = 0;
-	int rightIndex = 0;
-	int mergedIndex = 0;
+	int iLeft = 0;
+	int iRight = 0;
+	int current = leftStart;
 	
-	while (leftIndex < left.Length && rightIndex < right.Length)
+	while (iLeft < left.Length && iRight < right.Length)
 	{
-		if (left[leftIndex] <= right[rightIndex])
+		if (left[iLeft] <= right[iRight])
 		{
-			output[mergedIndex] = left[leftIndex++];
+			array[current++] = left[iLeft++];
 		}
 		else
 		{
-			output[mergedIndex] = right[rightIndex++];
-			inversionCount += left.Length - leftIndex;
+			inversionCount += left.Length - iLeft;
+			array[current++] = right[iRight++];
 		}
-		
-		mergedIndex++;
 	}
 	
-	while (leftIndex < left.Length)
+	while (iLeft < left.Length)
 	{
-		output[mergedIndex++] = left[leftIndex++];
+		array[current++] = left[iLeft++];
 	}
 	
-	while (rightIndex < right.Length)
+	while (iRight < right.Length)
 	{
-		output[mergedIndex++] = right[rightIndex++];
+		array[current++] = right[iRight++];
 	}
 	
 	return inversionCount;

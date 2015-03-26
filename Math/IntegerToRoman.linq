@@ -31,7 +31,7 @@ public static string ConvertIntToRoman(int number)
 	numberToRomanMap.Add(4, "IV");
 	numberToRomanMap.Add(1, "I");
 	
-	int[] romanValues = new int[] {100, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+	int[] romanValues = new int[] {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 	
 	StringBuilder roman= new StringBuilder();
 	

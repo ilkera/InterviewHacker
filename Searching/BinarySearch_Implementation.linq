@@ -34,7 +34,7 @@ public class BinarySearch
 {
 	public static bool Search(int[] array, int key)
 	{
-		if (array == null)
+		if (array == null || array.Length < 1)
 		{
 			return false;
 		}
@@ -65,7 +65,7 @@ public class BinarySearch
 	
 	public static int GetIndex(int[] array, int key)
 	{
-		if (array == null)
+		if (array == null || array.Length < 1)
 		{
 			return -1;
 		}
@@ -91,7 +91,7 @@ public class BinarySearch
 			}			
 		}
 		
-		return -1;
+		return -1; // not found
 	}
 	
 }

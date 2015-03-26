@@ -19,11 +19,17 @@ public static void test(string s1, string s2)
 
 public static bool Match(string first, string second)
  {
+ 	Console.WriteLine("First " + first + " Second " + second);
    	// If both strings are null, then we reached to end => return true
-   	if( string.IsNullOrEmpty(first) && string.IsNullOrEmpty(second))
+   	if(string.IsNullOrEmpty(first) && string.IsNullOrEmpty(second))
     {
         return true;
     }
+	
+	if (first.Length == 0)
+	{
+		return false;
+	}
 	
 	if (second.Length == 0)
 	{
@@ -31,11 +37,6 @@ public static bool Match(string first, string second)
 		{
 			return Match(first.Substring(1), second); 
 		}
-		return false;
-	}
-	
-	if (first.Length == 0)
-	{
 		return false;
 	}
 	

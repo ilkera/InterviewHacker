@@ -8,6 +8,8 @@ void Main()
 	PushZerosToRight(new int[] {1}).Dump();
 	PushZerosToRight(new int[] {}).Dump();
 	PushZerosToRight(new int[] {0,0,0,0,1,2,3,4}).Dump();
+	PushZerosToRight(new int[] {0, 1, 3, 0, 2, 0, 4, 1, 0, 0, 2}).Dump();
+	PushZerosToRight(new int[] {1, 2, 3, 0, 4}).Dump();
 }
 
 public static int PushZerosToRight(int[] array)

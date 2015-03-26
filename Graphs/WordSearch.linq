@@ -32,7 +32,7 @@ public static bool SearchWord(char[,] matrix, string word)
 	{
 		for (int col = 0; col < cols; col++)
 		{
-			if(Search(matrix, word, 0, row, col, visited))
+			if(!visited[row, col] && word[0] == matrix[row,col] && Search(matrix, word, 0, row, col, visited))
 			{
 				return true;
 			}
@@ -42,43 +42,54 @@ public static bool SearchWord(char[,] matrix, string word)
 	return false;
 }
 
-private static bool Search(char[,] matrix, string word, int index, int row, int col, bool[,] visited)
+private static bool CanMove(int row, int col, int rows, int cols, bool[,] visited)
 {
-	if (visited[row, col])
-	{
-		return false;
-	}
+	return row >= 0 && row < rows && col >= 0 && col < cols && !visited[row, col];
+}
+
+private static bool Search(char[,] matrix, string word, int index, int row, int col, bool[,] visited)
+{	
+	visited[row, col] = true;
+	++index;
 	
-	if (index + 1 == word.Length)
+	if (index == word.Length)
 	{
 		return true;
 	}
 	
-	visited[row, col] = true;
-	index++;
+	int rows = matrix.GetLength(0);
+	int cols = matrix.GetLength(1);
 	
 	// Go left (row, col - 1)
-	if (col - 1 >= 0 && matrix[row, col-1] == word[index])
+	if (CanMove(row, col-1,rows,cols,visited) && 
+		matrix[row, col-1] == word[index] &&
+		Search(matrix, word, index, row, col - 1, visited))
 	{
-		return Search(matrix, word, index, row, col - 1, visited);
+		return true;
 	}
 	
 	// Go right (row, col + 1)
-	if (col + 1 < matrix.GetLength(1) && matrix[row, col + 1] == word[index])
+	if (CanMove(row, col + 1, rows, cols,visited) &&
+		matrix[row, col + 1] == word[index] &&
+		Search(matrix, word, index, row, col + 1, visited))
 	{
-		return Search(matrix, word, index, row, col + 1, visited);
+		return true;
 	}
 	
 	// Go up (row - 1, col)
-	if (row - 1 >= 0 && matrix[row - 1, col] == word[index])
+	if (CanMove(row -1, col, rows, cols, visited) &&
+		matrix[row - 1, col] == word[index] &&
+		Search(matrix, word, index, row - 1, col, visited))
 	{
-		return Search(matrix, word, index, row - 1, col, visited);
+		return true;
 	}
 	
 	// Go down (row + 1, col)
-	if (row + 1 < matrix.GetLength(0) && matrix[row + 1, col] == word[index])
+	if (CanMove(row + 1, col, rows, col, visited) && 
+		matrix[row + 1, col] == word[index] &&
+		Search(matrix, word, index, row + 1, col, visited))
 	{
-		return Search(matrix, word, index, row + 1, col, visited);
+		return true;
 	}
 	
 	visited[row, col] = false;

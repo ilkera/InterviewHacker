@@ -56,14 +56,8 @@ public static void RotateArray_Faster(int[] array, int timesToRotate)
 	
 	for (int i = 0; i < array.Length; i++)
 	{
-		if (i + timesToRotate < array.Length)
-		{
-			newArray[i + timesToRotate] = array[i];
-		}
-		else
-		{
-			newArray[(i + timesToRotate) % array.Length] = array[i];
-		}
+		int newIndex = i + timesToRotate < array.Length ? i + timesToRotate : (i + timesToRotate) % array.Length;
+		newArray[newIndex] = array[i];
 	}
 	
 	for (int i = 0; i < array.Length; i++)

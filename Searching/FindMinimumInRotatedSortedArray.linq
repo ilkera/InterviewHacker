@@ -58,7 +58,7 @@ public static int FindMinElement(int[] array)
 		}	
 		else
 		{
-		 	high--;
+		 	--high;
 		}
 	}
 	
@@ -67,7 +67,5 @@ public static int FindMinElement(int[] array)
 	
 	return min;
 }
-
-
 
 // Define other methods and classes here

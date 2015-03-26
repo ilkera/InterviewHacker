@@ -45,9 +45,9 @@ public static List<string> JustifyText(string[] words)
 	{
 		StringBuilder lastLine = new StringBuilder(ConstructLineWithSpaces(words, currLineStart, words.Length - 1, currLineWords - 1));
 		
-		for (int i = 0; i < L - currLineLength - (currLineWords - 1); i++)
+		for (int i = 0; i < L - currLineLength; i++)
 		{
-			lastLine.Append(" ");
+			lastLine.Append("_");
 		}
 		
 		result.Add(lastLine.ToString());
@@ -71,18 +71,13 @@ private static string ConstructLineWithSpaces(string[] words, int start, int end
 		
 		for (int j = 0; j < numCurrSpace; j++)
 		{
-			line.Append(" ");
+			line.Append("_");
 		}
 		
 		numSpaces -= numCurrSpace;
 	}
 	
-	line.Append(words[end]);
-	for (int i = 0; i < L - numSpaces; i++)
-	{
-		line.Append(" ");
-	}
-	
+	line.Append(words[end]);	
 	return line.ToString();
 }
 

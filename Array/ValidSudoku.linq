@@ -51,13 +51,15 @@ public class Sudoku
 					continue;
 				}
 				
-				if (rowsSeen[iRow][currentNumber-1] || colsSeen[iCol][currentNumber-1] || blocksSeen[iRow - iRow % 3 + iCol / 3][currentNumber-1])
+				int blockIndex = iRow - iRow % 3 + iCol / 3;
+				
+				if (rowsSeen[iRow][currentNumber-1] || colsSeen[iCol][currentNumber-1] || blocksSeen[blockIndex][currentNumber-1])
 				{
 					return false;
 				}
 				rowsSeen[iRow][currentNumber-1] = true;
 				colsSeen[iCol][currentNumber-1] = true;
-				blocksSeen[iRow - iRow % 3 + iCol / 3][currentNumber - 1] = true;
+				blocksSeen[blockIndex][currentNumber - 1] = true;
 			}
 		}
 		
